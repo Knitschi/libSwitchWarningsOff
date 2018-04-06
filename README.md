@@ -14,7 +14,7 @@ manual includes are required in order to use the macro.
 #include "MySource.h"
 
 SWITCH_WARNINGS_ON
-// external includes
+// external headers that cause warnings during compilation
 #include <gtest/gtest.h>
 #include <QString>
 SWITCH_WARNINGS_OFF
