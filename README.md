@@ -1,6 +1,6 @@
 # Welcome to libSwitchWarningsOff
 
-This small CMake based C++ package provides two macros \c SWITCH_WARNINGS_OFF and \c SWITCH_WARNINGS_ON.
+This small CMake based C++ package provides two macros `SWITCH_WARNINGS_OFF` and `SWITCH_WARNINGS_ON`.
 The macros are supposed to be used to suppress warnings from external headers that often occur when compiling
 with high warning levels.
 
@@ -27,3 +27,9 @@ your code that should compile without warnings
 
 
 ```
+
+## Usage ##
+
+The macro is known to work with VS, Gcc and Clang. Add the repository as git submodule to your CMake project
+and add it with `add_subdirectory()`. Then you should get a *libSwitchWarningsOff* target that you can
+link to your targets.
