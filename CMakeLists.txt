@@ -1,4 +1,4 @@
-include(cpfAddPackage)
+include(cpfAddCppPackage)
 include(cpfLocations)
 
 #-----------------------------------------------------
