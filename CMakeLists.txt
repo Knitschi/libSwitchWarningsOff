@@ -91,7 +91,7 @@ configure_package_config_file(
 	
 write_basic_package_version_file( 
 	"${versionConfigFileFull}" 
-	COMPATIBILITY SameMajorVersion # currently we assume globally that this compatibility scheme applies
+	COMPATIBILITY ExactVersion # currently we assume globally that this compatibility scheme applies
 ) 
 
 # Install cmake exported targets config file
