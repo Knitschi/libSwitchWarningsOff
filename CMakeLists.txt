@@ -52,6 +52,10 @@ The header file is automatically added to the include defintions of client targe
 set( switchWarningsOffHeader SwitchWarningsOff.h )
 add_library( ${PACKAGE_NAME} INTERFACE )
 
+set(filesTarget ${PACKAGE_NAME}Files)
+add_custom_target( ${filesTarget} SOURCES ${switchWarningsOffHeader} )
+set_property(TARGET ${filesTarget} PROPERTY FOLDER ${PACKAGE_NAME} )
+
 getIncludeFileCompileOptions( includeFlags ${switchWarningsOffHeader} )
 target_compile_options( ${PACKAGE_NAME} INTERFACE ${includeFlags} )
 
