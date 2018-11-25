@@ -35,10 +35,8 @@ endfunction()
 # This targets ccbContains functions that extend the classes from the STL
 
 set( PACKAGE_NAMESPACE swo )
-cpfInitPackageProject(
-	PACKAGE_NAME
-	${PACKAGE_NAMESPACE}
-)
+cpfInitPackageProject(${PACKAGE_NAMESPACE})
+
 
 set( briefDescription "A package that provides macros to switch of warnings from external headers." )
 
@@ -50,40 +48,42 @@ The header file is automatically added to the include defintions of client targe
 
 #### add library without CppCodeBase, because it does not support interface libraries yet
 set( switchWarningsOffHeader SwitchWarningsOff.h )
-add_library( ${PACKAGE_NAME} INTERFACE )
+cpfGetPackageName(package)
+add_library( ${package} INTERFACE )
 
-set(filesTarget ${PACKAGE_NAME}Files)
+set(filesTarget ${package}Files)
 add_custom_target( ${filesTarget} SOURCES ${switchWarningsOffHeader} )
-set_property(TARGET ${filesTarget} PROPERTY FOLDER ${PACKAGE_NAME} )
+set_property(TARGET ${filesTarget} PROPERTY FOLDER ${package} )
+
 
 getIncludeFileCompileOptions( includeFlags ${switchWarningsOffHeader} )
-target_compile_options( ${PACKAGE_NAME} INTERFACE ${includeFlags} )
+target_compile_options( ${package} INTERFACE ${includeFlags} )
 
-target_compile_definitions( ${PACKAGE_NAME} INTERFACE BLUB )
+#target_compile_definitions( ${package} INTERFACE BLUB )
 
 ## install rules
-cpfGetRelativeOutputDir( relIncludeDir ${PACKAGE_NAME} INCLUDE)
-cpfGetTargetsExportsName( targetsExportName ${PACKAGE_NAME})
+cpfGetRelativeOutputDir( relIncludeDir ${package} INCLUDE)
+cpfGetTargetsExportsName( targetsExportName ${package})
 
 # exported targets
 install( 
-	TARGETS ${PACKAGE_NAME}
+	TARGETS ${package}
 	EXPORT ${targetsExportName}
-	COMPONENT ${PACKAGE_NAME}
+	COMPONENT ${package}
 	INCLUDES DESTINATION "${relIncludeDir}"
 )
 
 # install header file
 install(
 	FILES ${switchWarningsOffHeader}
-	COMPONENT ${PACKAGE_NAME}
+	COMPONENT ${package}
 	DESTINATION "${relIncludeDir}"
 )
 
 # generate and install cmake files
-cpfGetRelativeOutputDir( relConfigDir ${PACKAGE_NAME} CMAKE_CONFIG)
-set(packageConfigFile ${PACKAGE_NAME}Config.cmake)
-set(versionConfigFile ${PACKAGE_NAME}ConfigVersion.cmake )
+cpfGetRelativeOutputDir( relConfigDir ${package} CMAKE_CONFIG)
+set(packageConfigFile ${package}Config.cmake)
+set(versionConfigFile ${package}ConfigVersion.cmake )
 set(packageConfigFileFull "${CMAKE_CURRENT_BINARY_DIR}/${packageConfigFile}")	# The config file is used by find package 
 set(versionConfigFileFull "${CMAKE_CURRENT_BINARY_DIR}/${versionConfigFile}")
 
@@ -102,7 +102,7 @@ write_basic_package_version_file(
 # This can not be done in the configs loop, so we need a generator expression for the output directory
 install(
 	EXPORT "${targetsExportName}"
-	COMPONENT ${PACKAGE_NAME}
+	COMPONENT ${package}
 	NAMESPACE "${PACKAGE_NAMESPACE}::"
 	DESTINATION "${relConfigDir}"
 )
@@ -110,6 +110,6 @@ install(
 # Install cmake config files
 install(
 	FILES "${packageConfigFileFull}" "${versionConfigFileFull}"
-	COMPONENT ${PACKAGE_NAME}
+	COMPONENT ${package}
 	DESTINATION "${relConfigDir}"
 )
