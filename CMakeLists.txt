@@ -1,3 +1,4 @@
+include(cpfInitPackageProject)
 include(cpfAddCppPackage)
 include(cpfLocations)
 
@@ -35,7 +36,7 @@ endfunction()
 # This targets ccbContains functions that extend the classes from the STL
 
 set( PACKAGE_NAMESPACE swo )
-cpfInitPackageProject(${PACKAGE_NAMESPACE})
+cpfInitPackageProject()
 
 
 set( briefDescription "A package that provides macros to switch of warnings from external headers." )
