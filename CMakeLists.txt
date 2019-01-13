@@ -35,12 +35,22 @@ The header file is automatically added to the include defintions of client targe
 
 set( switchWarningsOffHeader SwitchWarningsOff.h )
 
+set(distributionPackageOptions
+	DISTRIBUTION_PACKAGES
+		DISTRIBUTION_PACKAGE_CONTENT_TYPE 	CT_DEVELOPER
+		DISTRIBUTION_PACKAGE_FORMATS 		7Z
+	DISTRIBUTION_PACKAGES
+		DISTRIBUTION_PACKAGE_CONTENT_TYPE 	CT_SOURCES
+		DISTRIBUTION_PACKAGE_FORMATS 		7Z
+)
+
 cpfAddCppPackage(
 	PACKAGE_NAMESPACE		swo
 	TYPE					INTERFACE_LIB
 	BRIEF_DESCRIPTION		${briefDescription}
 	LONG_DESCRIPTION		${longDescription}
 	PUBLIC_HEADER			${switchWarningsOffHeader}
+	${distributionPackageOptions}
 )
 
 # Add the public compile options that force includes the header with clients.
