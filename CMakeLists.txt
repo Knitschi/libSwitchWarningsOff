@@ -45,6 +45,8 @@ set(distributionPackageOptions
 )
 
 cpfAddCppPackage(
+	OWNER 					Knitschi
+	CPF_PROJECT_WEBPAGE_URL "https://github.com/Knitschi/libSwitchWarningsOff"
 	PACKAGE_NAMESPACE		swo
 	TYPE					INTERFACE_LIB
 	BRIEF_DESCRIPTION		${briefDescription}
