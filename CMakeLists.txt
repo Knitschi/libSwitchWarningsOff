@@ -45,14 +45,15 @@ set(distributionPackageOptions
 )
 
 cpfAddCppPackage(
-	OWNER 					Knitschi
-	CPF_PROJECT_WEBPAGE_URL "https://github.com/Knitschi/libSwitchWarningsOff"
-	PACKAGE_NAMESPACE		swo
-	TYPE					INTERFACE_LIB
-	BRIEF_DESCRIPTION		${briefDescription}
-	LONG_DESCRIPTION		${longDescription}
-	PUBLIC_HEADER			${switchWarningsOffHeader}
+	OWNER 							Knitschi
+	CPF_PROJECT_WEBPAGE_URL			"https://github.com/Knitschi/libSwitchWarningsOff"
+	PACKAGE_NAMESPACE				swo
+	TYPE							INTERFACE_LIB
+	BRIEF_DESCRIPTION				${briefDescription}
+	LONG_DESCRIPTION				${longDescription}
+	PUBLIC_HEADER					${switchWarningsOffHeader}
 	${distributionPackageOptions}
+	ENABLE_CLANG_FORMAT_TARGETS		FALSE
 )
 
 # Add the public compile options that force includes the header with clients.
