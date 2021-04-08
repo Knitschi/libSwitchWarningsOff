@@ -2,11 +2,7 @@
 
 /// Macros to switch off warnings from external header
 // Switch warnings off for vc
-#ifdef _WIN32
-
-	#ifdef SWITCH_WARNINGS_OFF
-		#undef SWITCH_WARNINGS_OFF
-	#endif
+#ifdef _MSC_VER
 
 	#define SWITCH_WARNINGS_OFF  \
 					__pragma(warning(push)) \
@@ -67,29 +63,28 @@
 					__pragma(warning(disable:26497)) \
 					__pragma(warning(disable:26498)) \
 
-
 	#define SWITCH_WARNINGS_ON __pragma(warning(pop))
 
 	#define SUPPRESS_DLL_WARNING __pragma(warning(suppress:4251))
 
 #endif
 
+#define CLANG_COMPILER (defined(__GNUC__) && defined(__clang__))
+
 // Switch warnings off for clang
-#ifdef __clang__
+#ifdef __GNUC__
+	#ifdef __clang__
 
-	#ifdef SWITCH_WARNINGS_OFF
-		#undef SWITCH_WARNINGS_OFF
+		#define SWITCH_WARNINGS_OFF \
+						_Pragma("clang diagnostic push")\
+						_Pragma("clang diagnostic ignored \"-Wgnu-zero-variadic-macro-arguments\"")\
+
+
+		#define SWITCH_WARNINGS_ON _Pragma("clang diagnostic pop")
+
+		#define SUPPRESS_DLL_WARNING
+
 	#endif
-
-	#define SWITCH_WARNINGS_OFF \
-					_Pragma("clang diagnostic push")\
-					_Pragma("clang diagnostic ignored \"-Wgnu-zero-variadic-macro-arguments\"")\
-
-
-	#define SWITCH_WARNINGS_ON _Pragma("clang diagnostic pop")
-
-	#define SUPPRESS_DLL_WARNING
-
 #endif
 
 
