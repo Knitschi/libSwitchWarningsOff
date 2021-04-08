@@ -86,13 +86,9 @@
 					_Pragma("clang diagnostic ignored \"-Wgnu-zero-variadic-macro-arguments\"")\
 
 
-	#ifndef SWITCH_WARNINGS_ON
-		#define SWITCH_WARNINGS_ON _Pragma("clang diagnostic pop")
-	#endif 
+	#define SWITCH_WARNINGS_ON _Pragma("clang diagnostic pop")
 
-	#ifndef SUPPRESS_DLL_WARNING
-		#define SUPPRESS_DLL_WARNING
-	#endif
+	#define SUPPRESS_DLL_WARNING
 
 #endif
 
