@@ -28,7 +28,7 @@ your code that should compile without warnings
 
 ```
 
-## Usage ##
+## Usage ## 
 
 The macro is known to work with VS, Gcc and Clang. Add the repository as git submodule to your CMake project
 and add it with `add_subdirectory()`. Then you should get a *libSwitchWarningsOff* target that you can
