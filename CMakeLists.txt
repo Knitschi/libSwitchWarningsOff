@@ -1,5 +1,5 @@
-include(cpfInitPackageProject)
-include(cpfAddCppPackage)
+include(cpfPackageProject)
+include(cpfAddCppPackageComponent)
 include(cpfLocations)
 
 #-----------------------------------------------------
@@ -22,20 +22,19 @@ endfunction()
 
 # This targets ccbContains functions that extend the classes from the STL
 
-set( PACKAGE_NAMESPACE swo )
-cpfInitPackageProject()
-
-set( briefDescription "A package that provides macros to switch of warnings from external headers." )
-
 set( longDescription 
 "The package provides only the SwitchWarningsOffMacro.h header. 
 The header file is automatically added to the include defintions of client targets, to make sure it must not manually included for each source file.
 "
 )
 
-set( switchWarningsOffHeader SwitchWarningsOff.h )
-
-set(distributionPackageOptions
+cpfPackageProject(
+	BRIEF_DESCRIPTION				"A package that provides macros to switch of warnings from external headers."
+	LONG_DESCRIPTION				${longDescription}
+	WEBPAGE_URL						"https://github.com/Knitschi/libSwitchWarningsOff"
+	OWNER 							Knitschi
+	TARGET_NAMESPACE swo
+	COMPONENTS 						SINGLE_COMPONENT
 	DISTRIBUTION_PACKAGES
 		DISTRIBUTION_PACKAGE_CONTENT_TYPE 	CT_DEVELOPER
 		DISTRIBUTION_PACKAGE_FORMATS 		7Z
@@ -44,19 +43,15 @@ set(distributionPackageOptions
 		DISTRIBUTION_PACKAGE_FORMATS 		7Z
 )
 
-cpfAddCppPackage(
-	OWNER 							Knitschi
-	CPF_PROJECT_WEBPAGE_URL			"https://github.com/Knitschi/libSwitchWarningsOff"
-	PACKAGE_NAMESPACE				swo
+set( switchWarningsOffHeader SwitchWarningsOff.h )
+
+cpfAddCppPackageComponent(
 	TYPE							INTERFACE_LIB
-	BRIEF_DESCRIPTION				${briefDescription}
-	LONG_DESCRIPTION				${longDescription}
 	PUBLIC_HEADER					${switchWarningsOffHeader}
-	${distributionPackageOptions}
 	ENABLE_CLANG_FORMAT_TARGETS		FALSE
 )
 
 # Add the public compile options that force includes the header with clients.
-cpfGetPackageName(package)
+cpfGetCurrentSourceDir(packageComponent)
 getIncludeFileCompileOptions( includeFlags ${switchWarningsOffHeader} )
-target_compile_options( ${package} INTERFACE ${includeFlags} )
+target_compile_options( ${packageComponent} INTERFACE ${includeFlags} )
