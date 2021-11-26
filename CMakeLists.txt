@@ -56,4 +56,4 @@ cpfGetCurrentSourceDir(packageComponent)
 getIncludeFileCompileOptions( includeFlags ${switchWarningsOffHeader} )
 target_compile_options( ${packageComponent} INTERFACE ${includeFlags} )
 
-finalizePackageProject()
+cpfFinalizePackageProject()
