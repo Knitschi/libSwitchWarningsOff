@@ -53,6 +53,6 @@ cpfAddCppPackageComponent(
 
 # Add the public compile options that force includes the header with clients.
 getIncludeFileCompileOptions( includeFlags ${switchWarningsOffHeader})
-target_compile_options(${PROJECT} INTERFACE ${includeFlags})
+target_compile_options(${PROJECT_NAME} INTERFACE ${includeFlags})
 
 cpfFinalizePackageProject()
